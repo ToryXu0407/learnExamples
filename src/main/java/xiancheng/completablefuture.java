@@ -1,9 +1,7 @@
 package xiancheng;
 
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.function.*;
 
 /**
@@ -36,16 +34,17 @@ public class completablefuture {
         });
 
         long time = future.get();
-        System.out.println("time = "+time);
+        System.out.println("time = " + time);
     }
+
     public static void whenComplete() throws Exception {
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
             }
-            if(new Random().nextInt()%2>=0) {
-                int i = 12/0;
+            if (new Random().nextInt() % 2 >= 0) {
+                int i = 12 / 0;
             }
             System.out.println("run end ...");
         });
@@ -60,26 +59,27 @@ public class completablefuture {
         future.exceptionally(new Function<Throwable, Void>() {
             @Override
             public Void apply(Throwable t) {
-                System.out.println("执行失败！"+t.getMessage());
+                System.out.println("执行失败！" + t.getMessage());
                 return null;
             }
         });
 
         TimeUnit.SECONDS.sleep(2);
     }
+
     private static void thenApply() throws Exception {
         CompletableFuture<Long> future = CompletableFuture.supplyAsync(new Supplier<Long>() {
             @Override
             public Long get() {
                 long result = new Random().nextInt(100);
-                System.out.println("result1="+result);
+                System.out.println("result1=" + result);
                 return result;
             }
         }).thenApply(new Function<Long, Long>() {
             @Override
             public Long apply(Long t) {
-                long result = t*5;
-                System.out.println("result2="+result);
+                long result = t * 5;
+                System.out.println("result2=" + result);
                 return result;
             }
         });
@@ -87,21 +87,22 @@ public class completablefuture {
         long result = future.get();
         System.out.println(result);
     }
-    public static void handle() throws Exception{
+
+    public static void handle() throws Exception {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(new Supplier<Integer>() {
 
             @Override
             public Integer get() {
-                int i= 10/0;
+                int i = 10 / 0;
                 return new Random().nextInt(10);
             }
         }).handle(new BiFunction<Integer, Throwable, Integer>() {
             @Override
             public Integer apply(Integer param, Throwable throwable) {
                 int result = -1;
-                if(throwable==null){
+                if (throwable == null) {
                     result = param * 2;
-                }else{
+                } else {
                     System.out.println(throwable.getMessage());
                 }
                 return result;
@@ -109,7 +110,8 @@ public class completablefuture {
         });
         System.out.println(future.get());
     }
-    public static void thenAccept() throws Exception{
+
+    public static void thenAccept() throws Exception {
         CompletableFuture<Void> future = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
@@ -120,7 +122,8 @@ public class completablefuture {
         });
         future.get();
     }
-    public static void thenRun() throws Exception{
+
+    public static void thenRun() throws Exception {
         CompletableFuture<Void> future = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
@@ -131,6 +134,7 @@ public class completablefuture {
         });
         future.get();
     }
+
     private static void thenCombine() throws Exception {
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(new Supplier<String>() {
             @Override
@@ -147,11 +151,12 @@ public class completablefuture {
         CompletableFuture<String> result = future1.thenCombine(future2, new BiFunction<String, String, String>() {
             @Override
             public String apply(String t, String u) {
-                return t+" "+u;
+                return t + " " + u;
             }
         });
         System.out.println(result.get());
     }
+
     private static void thenAcceptBoth() throws Exception {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
@@ -162,7 +167,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f1="+t);
+                System.out.println("f1=" + t);
                 return t;
             }
         });
@@ -176,17 +181,18 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f2="+t);
+                System.out.println("f2=" + t);
                 return t;
             }
         });
         f1.thenAcceptBoth(f2, new BiConsumer<Integer, Integer>() {
             @Override
             public void accept(Integer t, Integer u) {
-                System.out.println("f1="+t+";f2="+u+";");
+                System.out.println("f1=" + t + ";f2=" + u + ";");
             }
         });
     }
+
     private static void applyToEither() throws Exception {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
@@ -197,7 +203,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f1="+t);
+                System.out.println("f1=" + t);
                 return t;
             }
         });
@@ -210,7 +216,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f2="+t);
+                System.out.println("f2=" + t);
                 return t;
             }
         });
@@ -225,6 +231,7 @@ public class completablefuture {
 
         System.out.println(result.get());
     }
+
     //好像不行
     private static void acceptEither() throws Exception {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
@@ -236,7 +243,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f1="+t);
+                System.out.println("f1=" + t);
                 return t;
             }
         });
@@ -250,7 +257,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f2="+t);
+                System.out.println("f2=" + t);
                 return t;
             }
         });
@@ -261,6 +268,7 @@ public class completablefuture {
             }
         });
     }
+
     //好像不行
     private static void runAfterBoth() throws Exception {
         CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
@@ -272,7 +280,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f1="+t);
+                System.out.println("f1=" + t);
                 return t;
             }
         });
@@ -286,7 +294,7 @@ public class completablefuture {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("f2="+t);
+                System.out.println("f2=" + t);
                 return t;
             }
         });
@@ -298,12 +306,13 @@ public class completablefuture {
             }
         });
     }
+
     private static void thenCompose() throws Exception {
         CompletableFuture<Integer> f = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
                 int t = new Random().nextInt(3);
-                System.out.println("t1="+t);
+                System.out.println("t1=" + t);
                 return t;
             }
         }).thenCompose(new Function<Integer, CompletionStage<Integer>>() {
@@ -312,21 +321,42 @@ public class completablefuture {
                 return CompletableFuture.supplyAsync(new Supplier<Integer>() {
                     @Override
                     public Integer get() {
-                        int t = param *2;
-                        System.out.println("t2="+t);
+                        int t = param * 2;
+                        System.out.println("t2=" + t);
                         return t;
                     }
                 });
             }
 
         });
-        System.out.println("thenCompose result : "+f.get());
+        System.out.println("thenCompose result : " + f.get());
     }
+
     public static void main(String[] args) {
         try {
             thenCompose();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void pool() {
+        ExecutorService service = Executors.newFixedThreadPool(3, new ThreadFactory() {
+            int count = 1;
+
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "custom-executor-" + count++);
+            }
+        });
+
+    }
+
+    static void thenApplyAsyncWithExecutorExample() {
+        CompletableFuture<String> cf = CompletableFuture.completedFuture("message").thenApplyAsync(s->{
+            assert(Thread.currentThread().getName().startsWith("custom-executor-"));
+            assert
+
+        })
     }
 }

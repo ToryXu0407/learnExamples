@@ -1,0 +1,15 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_4.dtd"
+		xmlns:task="http://www.springframework.org/schema/task"   
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd>
+ 
+<web-app>
+	<display-name>MobileAdmin</display-name>
+		<task:annotation-driven scheduler="myScheduler"/>
+		<task:scheduler id="myScheduler" pool-size="5"/>
+		<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
+	
+</web-app>
