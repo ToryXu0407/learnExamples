@@ -351,12 +351,12 @@ public class completablefuture {
         });
 
     }
-
-    static void thenApplyAsyncWithExecutorExample() {
-        CompletableFuture<String> cf = CompletableFuture.completedFuture("message").thenApplyAsync(s->{
-            assert(Thread.currentThread().getName().startsWith("custom-executor-"));
-            assert
-
-        })
-    }
+//
+//    static void thenApplyAsyncWithExecutorExample() {
+//        CompletableFuture<String> cf = CompletableFuture.completedFuture("message").thenApplyAsync(s->{
+//            assert(Thread.currentThread().getName().startsWith("custom-executor-"));
+//            assert
+//
+//        })
+//    }
 }
