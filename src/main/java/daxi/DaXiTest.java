@@ -8,23 +8,26 @@ package daxi;
 public class DaXiTest {
 
     public static void main(String[] args) {
-        //第一题
-        int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
-        int[][] interval2 = {{1, 4}, {1, 5}};
-        merge(intervals);
-        merge(interval2);
-
-        //第二题
-        System.out.println(valid("internationalization", "i12iz4n"));
-        System.out.println(valid("apple", "a2e"));
-
-        //第三题
-        int[][] edges = {{1, 2, 1}, {2, 3, 3}, {1, 3, 2}};
-        int[][] edges2 = {{1, 2, 1}, {2, 3, 3}, {1, 4, 2}, {3, 5, 5}, {4, 5, 4}};
-        int[][] edges3 = {{1, 2, 1}, {2, 4, 3}, {1, 4, 2}};
-        System.out.println(minPath(3, edges, 1, 3));
-        System.out.println(minPath(5, edges2, 1, 5));
-        System.out.println(minPath(5, edges3, 1, 5));
+        int a = 10;
+        long test = 012;
+        System.out.println(012);
+//        //第一题
+//        int[][] intervals = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+//        int[][] interval2 = {{1, 4}, {1, 5}};
+//        merge(intervals);
+//        merge(interval2);
+//
+//        //第二题
+//        System.out.println(valid("internationalization", "i12iz4n"));
+//        System.out.println(valid("apple", "a2e"));
+//
+//        //第三题
+//        int[][] edges = {{1, 2, 1}, {2, 3, 3}, {1, 3, 2}};
+//        int[][] edges2 = {{1, 2, 1}, {2, 3, 3}, {1, 4, 2}, {3, 5, 5}, {4, 5, 4}};
+//        int[][] edges3 = {{1, 2, 1}, {2, 4, 3}, {1, 4, 2}};
+//        System.out.println(minPath(3, edges, 1, 3));
+//        System.out.println(minPath(5, edges2, 1, 5));
+//        System.out.println(minPath(5, edges3, 1, 5));
     }
 
     /**
